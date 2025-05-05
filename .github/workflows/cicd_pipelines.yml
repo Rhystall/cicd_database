@@ -22,6 +22,10 @@ jobs:
             password: ${{ secrets.SERVER_PASSWORD }}
             script: |
               echo "Berhasil Koneksi ke server"
+              cd /home/rhystalgie/cicd_database
+              echo "Berhasil masuk ke direktori /home/rhystalgie/cicd_database"
+              docker compose up -d #Menjalankan docker compose di server
+              echo "Berhasil menjalankan docker compose"
           
 
 
