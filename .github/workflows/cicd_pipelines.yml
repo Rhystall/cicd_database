@@ -30,4 +30,4 @@ jobs:
             echo "Menunggu mysql untuk siap..."
             sleep 30
 
-            docker exec mysql_devel_container mysql -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -e "SHOW_DATABASES;" #Menampilkan database yang ada di mysql_devel_container
+            docker exec mysql_devel_container mysql -u root -p${{ secrets.SERVER_PASSWORD }} -e "SHOW_DATABASES;" #Menampilkan database yang ada di mysql_devel_container
