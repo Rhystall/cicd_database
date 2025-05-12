@@ -23,7 +23,7 @@ jobs:
             echo "Berhasil Koneksi ke server"
             cd /home/rhystalgie/cicd_database
             echo "Berhasil masuk ke direktori /home/rhystalgie/cicd_database"
-            docker compose up -d
+            sudo docker compose up -d
             echo "Berhasil menjalankan docker compose"
 
             # #CI (Continuous Integration)
