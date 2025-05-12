@@ -26,7 +26,6 @@ jobs:
             docker compose up -d
             echo "Berhasil menjalankan docker compose"
 
-            # testlagi
             # #CI (Continuous Integration)
             # echo "Menunggu mysql untuk siap..."
             # sleep 30
