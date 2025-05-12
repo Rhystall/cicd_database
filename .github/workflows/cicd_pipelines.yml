@@ -25,3 +25,9 @@ jobs:
             echo "Berhasil masuk ke direktori /home/rhystalgie/cicd_database"
             sudo docker compose up -d
             echo "Berhasil menjalankan docker compose"
+
+
+            echo "Menunggu mysql untuk siap..."
+            sleep 30
+
+            docker exec mysql_devel_container mysql -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -e "SHOW_DATABASES;" #Menampilkan database yang ada di mysql_devel_container
