@@ -26,18 +26,18 @@ jobs:
             sudo docker compose up -d
             echo "Berhasil menjalankan docker compose"
 
-            #CI (Continuous Integration)
-            echo "Menunggu mysql untuk siap..."
-            sleep 30
+            # #CI (Continuous Integration)
+            # echo "Menunggu mysql untuk siap..."
+            # sleep 30
 
-            docker exec mysql_devel_container mysql -u root -pTelkom123! -e "SHOW_DATABASES;" #Menampilkan database yang ada di mysql_devel_container
+            # docker exec mysql_devel_container mysql -u root -pTelkom123! -e "SHOW_DATABASES;" #Menampilkan database yang ada di mysql_devel_container
 
-            #CD (Continuous Deployment)
-            echo "DUMP Database dari mysql_devel"
-            docker exec mysql_devel_container sh -c "mysqldump -u root -pTelkom123! academics_devel > dump.sql" #Dump database dari mysql_devel_container ke file dump.sql
+            # #CD (Continuous Deployment)
+            # echo "DUMP Database dari mysql_devel"
+            # docker exec mysql_devel_container sh -c "mysqldump -u root -pTelkom123! academics_devel > dump.sql" #Dump database dari mysql_devel_container ke file dump.sql
 
-            echo "Copy dump ke mysql_prod"
-            docker cp dump.sql mysql_prod_container:/dump.sql #Copy file dump.sql ke mysql_prod_container
+            # echo "Copy dump ke mysql_prod"
+            # docker cp dump.sql mysql_prod_container:/dump.sql #Copy file dump.sql ke mysql_prod_container
 
-            echo "Import dump ke mysql_prod"
-            docker exec mysql_prod_container sh -c "mysql -u root -pTelkom123! academics < /tmp/dump.sql" #Import file dump.sql ke database academics_prod di mysql_prod_container
+            # echo "Import dump ke mysql_prod"
+            # docker exec mysql_prod_container sh -c "mysql -u root -pTelkom123! academics < /tmp/dump.sql" #Import file dump.sql ke database academics_prod di mysql_prod_container
