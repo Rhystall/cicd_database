@@ -10,11 +10,9 @@ jobs:
     name: Database CI/CD 
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout Repository
       - name: Checkout code
         uses: actions/checkout@v4
     
-      # Step 2: SSH Connection to Server
       - name: SSH Connect 
         uses: appleboy/ssh-action@v0.1.3
         with:
@@ -22,40 +20,24 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            echo "✅ Berhasil Koneksi ke server"
+            echo "Berhasil Koneksi ke server"
             cd /home/rhystalgie/cicd_database
-            echo "✅ Berhasil masuk ke direktori /home/rhystalgie/cicd_database"
+            echo "Berhasil masuk ke direktori /home/rhystalgie/cicd_database"
+            sudo docker compose up -d
+            echo "Berhasil menjalankan docker compose"
 
-            # Jalankan Docker Compose
-            echo "🚀 Menjalankan docker compose..."
-            echo "$PASSWORD" | sudo -S docker compose up -d
-
-            # CI - Continuous Integration
-            echo "⏳ Menunggu Server MySQL Siap (30 detik)"
+            #CI (Continuous Integration)
+            echo "Menunggu mysql untuk siap..."
             sleep 30
 
-            # Cek Database di mysql_devel_container
-            echo "🛠️ Menampilkan database di mysql_devel_container"
-            sudo docker exec mysql_devel_container mysql -u root -pTelkom123! -e "SHOW DATABASES;"
+            docker exec mysql_devel_container mysql -u root -pTelkom123! -e "SHOW_DATABASES;" #Menampilkan database yang ada di mysql_devel_container
 
-            # CD - Continuous Deployment
-            echo "📦 DUMP Database dari mysql_devel"
-            sudo docker exec mysql_devel_container sh -c "mysqldump -u root -pTelkom123! academics_devel" > dump.sql
+            #CD (Continuous Deployment)
+            echo "DUMP Database dari mysql_devel"
+            docker exec mysql_devel_container sh -c "mysqldump -u root -pTelkom123! academics_devel > dump.sql" #Dump database dari mysql_devel_container ke file dump.sql
 
-            # Cek jika dump.sql berhasil dibuat
-            if [ -f dump.sql ]; then
-              echo "✅ Dump berhasil dibuat"
-            else
-              echo "❌ Dump gagal dibuat"
-              exit 1
-            fi
+            echo "Copy dump ke mysql_prod"
+            docker cp dump.sql mysql_prod_container:/dump.sql #Copy file dump.sql ke mysql_prod_container
 
-            # Copy dump.sql ke mysql_prod_container
-            echo "📦 Copy dump.sql ke mysql_prod_container"
-            sudo docker cp dump.sql mysql_prod_container:/tmp/dump.sql
-
-            # Import dump.sql ke mysql_prod_container
-            echo "📦 Import dump.sql ke mysql_prod_container"
-            sudo docker exec mysql_prod_container sh -c "mysql -u root -pTelkom123! academics < /tmp/dump.sql"
-
-            echo "✅ Berhasil Import Database ke mysql_prod"
+            echo "Import dump ke mysql_prod"
+            docker exec mysql_prod_container sh -c "mysql -u root -pTelkom123! academics < /tmp/dump.sql" #Import file dump.sql ke database academics_prod di mysql_prod_container
