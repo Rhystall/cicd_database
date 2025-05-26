@@ -31,7 +31,7 @@ jobs:
               cd /home/rhystalgie
             fi
 
-            if { -d ".git" }; then
+            if [ -d ".git" ]; then
               echo "Direktori .git ada, melakukan pull..."
               /cicd_database_example.git
               git pull origin main
