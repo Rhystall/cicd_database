@@ -33,9 +33,9 @@ jobs:
 
             if [ -d ".git" ]; then
               echo "Direktori .git ada, melakukan pull..."
-              git remote set-url origin https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PAT }}@github.com/${{secrets.GIT_USERNAME }}/cicd_database.git
+              git remote set-url origin https://github.com/Rhystall/cicd_database
               git pull origin main
             else
               echo "Direktori .git tidak ada, melakukan clone..."
-              git clone https//${{secrets.GIT_USERNAME }}:${{ secrets.GIT_PAT }}@github.com/${{ secrets.GIT_USERNAME }}/cicd_database.git .
+              git clone https://github.com/Rhystall/cicd_database .
             fi
