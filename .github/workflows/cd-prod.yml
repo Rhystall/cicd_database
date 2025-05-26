@@ -19,14 +19,14 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
-          script: |
-            echo "Berhasil Koneksi ke server"
-            if [-d "/home/rhystalgie"]; then
-              echo "Direktori /home/rhystalgie ada"
-              cd /home/rhystalgie
-              echo "Berhasil masuk ke direktori /home/rhystalgie"
-            else
-              echo "Direktori /home/rhystalgie tidak ada, membuat direktori..."
-              mkdir /home/rhystalgie
-              cd /home/rhystalgie
-            fi
+        script: |
+          echo "Berhasil Koneksi ke server"
+          if [ -d "/home/rhystalgie" ]; then
+            echo "Direktori /home/rhystalgie ada"
+            cd /home/rhystalgie
+            echo "Berhasil masuk ke direktori /home/rhystalgie"
+          else
+            echo "Direktori /home/rhystalgie tidak ada, membuat direktori..."
+            mkdir /home/rhystalgie
+            cd /home/rhystalgie
+          fi
