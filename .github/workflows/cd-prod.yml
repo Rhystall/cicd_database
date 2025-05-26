@@ -28,7 +28,7 @@ jobs:
             else
               echo "Direktori /home/rhystalgie tidak ada, membuat direktori..."
               mkdir /home/rhystalgie
-              cd /home/rhystalgie
+              cd /home/rhystalgie/cicd_database
             fi
 
             if [ -d ".git" ]; then
