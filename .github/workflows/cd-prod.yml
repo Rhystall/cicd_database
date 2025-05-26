@@ -28,7 +28,7 @@ jobs:
             else
               echo "Direktori /home/rhystalgie tidak ada, membuat direktori..."
               mkdir /home/rhystalgie
-              cd /home/rhystalgie/cicd_database
+              cd /home/rhystalgie/
             fi
 
             if [ -d ".git" ]; then
@@ -37,5 +37,5 @@ jobs:
               git pull origin main
             else
               echo "Direktori .git tidak ada, melakukan clone..."
-              git clone https://github.com/Rhystall/cicd_database .
+              git clone https://github.com/Rhystall/cicd_database 
             fi
