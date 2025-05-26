@@ -21,7 +21,7 @@ jobs:
           port: 22
           script: |
             echo "Berhasil Koneksi ke server"
-            if {-d "/home/rhystalgie"}; then
+            if [-d "/home/rhystalgie"]; then
               echo "Direktori /home/rhystalgie ada"
               cd /home/rhystalgie
               echo "Berhasil masuk ke direktori /home/rhystalgie"
