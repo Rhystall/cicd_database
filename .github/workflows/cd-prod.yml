@@ -31,7 +31,7 @@ jobs:
               cd /home/rhystalgie/
             fi
 
-            if [ -d ".git" ]; then
+            if [ -d "cicd_database/.git" ]; then
               echo "Direktori .git ada, melakukan pull..."
               git remote set-url origin https://github.com/Rhystall/cicd_database
               git pull origin main
