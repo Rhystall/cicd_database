@@ -30,3 +30,13 @@ jobs:
               mkdir /home/rhystalgie
               cd /home/rhystalgie
             fi
+
+            if { -d ".git" }; then
+              echo "Direktori .git ada, melakukan pull..."
+              /cicd_database_example.git
+              git pull origin main
+            else
+              echo "Direktori .git tidak ada, melakukan clone..."
+              git clone
+              /cicd_database_example.git
+            fi
